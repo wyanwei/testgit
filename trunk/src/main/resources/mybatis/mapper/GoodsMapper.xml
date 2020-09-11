@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.perfat.boot.mybatis.entity.GoodsInfo">
+
+    <resultMap id="BaseResultMap" type="com.perfat.boot.mybatis.entity.GoodsInfo">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="number" jdbcType="VARCHAR" property="number" />
+        <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+        <result column="desc" jdbcType="VARCHAR" property="desc" />
+        <result column="brand" jdbcType="VARCHAR" property="brand" />
+        <result column="price" jdbcType="VARCHAR" property="price" />
+    </resultMap>
+
+    <select id="getGoodsInfo" resultMap="BaseResultMap">
+        select * from goods
+    </select>
+
+</mapper>
