@@ -1,0 +1,7 @@
+1、事物的传播、隔离这块
+2、SpringMvc 、SpringBoot
+3、JAVA的拆箱、装箱
+4、Mysql的锁
+4、sql优化 （组合索引、索引优化、分库分表）
+5、HashMap
+6、redis、memcached的场景、缓存应如何设计
