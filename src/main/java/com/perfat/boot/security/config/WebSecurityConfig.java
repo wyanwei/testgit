@@ -49,7 +49,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()//http.authorizeRequests() 方法中的自定义匹配
                 .antMatchers("/index.jsp", "/anonymous/**").permitAll()//定义哪些请求不用拦截保护
-                .antMatchers("/admin/**").hasRole("SECURITY_ADMIN")
+                .antMatchers("/admin/**").hasAnyRole("SECURITY_ADMIN","CUSTOMER")
+
                 .anyRequest().authenticated()//任何请求，登录后可以访问
                 .and()
                 .formLogin().loginPage("/login")

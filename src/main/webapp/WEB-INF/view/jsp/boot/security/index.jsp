@@ -25,8 +25,11 @@
                         ${role.name}&nbsp;
                     </c:forEach>
                 </td>
-                <td><%--<c:if test="${user.userName != 'wangyw'}">--%><a
-                        href="/boot/admin/auth/delete?id=${user.id}">删除</a><%--</c:if>--%></td>
+                <td><%--<c:if test="${user.userName != 'wangyw'}">--%>
+                    <% if(hasRole) {%>
+                       <a href="/boot/admin/auth/delete?id=${user.id}">删除</a><%--</c:if>--%>
+                    <% }%>
+                </td>
             </tr>
         </c:forEach>
         <tr>
