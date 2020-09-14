@@ -25,9 +25,9 @@
                         ${role.name}&nbsp;
                     </c:forEach>
                 </td>
-                <td><%--<c:if test="${user.userName != 'wangyw'}">--%>
+                <td>
                     <% if(hasRole) {%>
-                       <a href="/boot/admin/auth/delete?id=${user.id}">删除</a><%--</c:if>--%>
+                       <a href="/boot/admin/auth/delete?id=${user.id}">删除</a>
                     <% }%>
                 </td>
             </tr>
