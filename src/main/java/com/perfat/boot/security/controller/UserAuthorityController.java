@@ -50,12 +50,12 @@ public class UserAuthorityController {
 
     @RequestMapping(value = "/create")
     public String addUser(@Valid UserAuthorityModel userAuthorityModel, BindingResult bindResult, Model model) {
-        if (bindResult.hasErrors()) {
+        if ( bindResult.hasErrors() ) {
             return "security/add";
         }
 
         UserInfoData userInfoData = securityService.getUserInfoDataByUsername(userAuthorityModel.getUsername());
-        if (null != userInfoData) {
+        if ( null != userInfoData ) {
             model.addAttribute("username", "该用户名已存在");
             return "security/add";
         }

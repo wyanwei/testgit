@@ -4,10 +4,14 @@
  */
 package com.perfat.boot.thread;
 
+import com.perfat.boot.security.entity.UserInfoData;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 
 /**
  * @author wangyw <a href="mailto:wangyw@chsi.com.cn">WangYanWei</a>
@@ -20,7 +24,9 @@ public class ThreadExecutorTest {
         //ExecutorService cacheThreadPool = Executors.newCachedThreadPool();
 
         //固定个数的线程池
-        //ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+
+        //ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor()
 
         //定时线程
         ScheduledExecutorService scheduThreadPool = Executors.newScheduledThreadPool(1);
@@ -41,17 +47,27 @@ public class ThreadExecutorTest {
 
         for ( int i = 0; i < 10; i++ ) {
             final int index = i;
-            singleThreadExecutor.execute(new Runnable() {
+            /*fixedThreadPool.execute(new Runnable() {
                 @Override
                 public void run() {
-                    System.out.println("线程" + Thread.currentThread().getName()+ "打印当前值:" + index);
-                    try {
+                    System.out.println("启动线程" + Thread.currentThread().getName()+ "打印当前值:" + index);
+                    *//*try {
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
-                    }
+                    }*//*
                 }
             });
+*/
+            fixedThreadPool.execute(() -> {
+                System.out.println("线程" + Thread.currentThread().getName()+ "打印当前值:" + index);
+                /*try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }*/
+              }
+            );
         }
 
 
