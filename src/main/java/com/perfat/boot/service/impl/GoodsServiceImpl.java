@@ -41,11 +41,11 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public void saveOrUpdateGoods(GoodsData goodsData) {
         GoodsData goodsInfo = goodsDao.getGoodsDataByName(StringUtils.trim(goodsData.getName()));
-        if (null == goodsInfo) {
+        if ( null == goodsInfo ) {
             goodsInfo = new GoodsData();
         }
         int count = 0;
-        if (StringUtils.isBlank(goodsInfo.getNumber())) {
+        if ( StringUtils.isBlank(goodsInfo.getNumber()) ) {
             count = StringUtils.isBlank(goodsData.getNumber()) ? 0 : Integer.parseInt(goodsData.getNumber());
         } else {
             count = Integer.parseInt(goodsInfo.getNumber()) + (StringUtils.isBlank(goodsData.getNumber()) ? 0 : Integer.parseInt(goodsData.getNumber()));
