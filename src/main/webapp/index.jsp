@@ -1,18 +1,2 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" errorPage="" %>
-<h1>hi : ${username}-测试-1-dev-dev测试提交  - dev测试--继续11-xxxxx---主干测试-分支测试
-
-
-
-   主干测试！！！！1111111121312321123131
-
-
-    sdfasdfa
-
-
-    dev-13
-
-    测试也
-
-     主干提交
-
-<h1>
+<h1>hi : ${username}</h1>
