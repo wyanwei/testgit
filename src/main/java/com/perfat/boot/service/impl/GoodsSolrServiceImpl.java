@@ -51,12 +51,12 @@ public class GoodsSolrServiceImpl implements GoodsSolrService {
             doc.setField("updateTime", goodsData.getUpdateTime().getTime());
             solrClient.add(doc);
             solrClient.commit();
-        } catch (Exception e) {
+        } catch ( Exception e ) {
             log.info("保存商品信息到solr异常：{}", e);
         } finally {
             try {
                 solrClient.close();
-            } catch (IOException e) {
+            } catch ( IOException e ) {
                 log.info("关闭solrClient异常：{}", e);
             }
         }
@@ -75,12 +75,12 @@ public class GoodsSolrServiceImpl implements GoodsSolrService {
         try {
             solrClient.addBean(goodBean);
             solrClient.commit();
-        } catch (Exception e) {
+        } catch ( Exception e ) {
             log.info("保存商品信息到solr异常：{}", e);
         } finally {
             try {
                 solrClient.close();
-            } catch (IOException e) {
+            } catch ( IOException e ) {
                 log.info("关闭solrClient异常：{}", e);
             }
         }
@@ -88,11 +88,11 @@ public class GoodsSolrServiceImpl implements GoodsSolrService {
 
     @Override
     public void saveGoodsDataByBeanList(List<GoodsData> goodsDataList) {
-        if (null == goodsDataList || goodsDataList.isEmpty()) {
+        if ( null == goodsDataList || goodsDataList.isEmpty() ) {
             return;
         }
         List<GoodBean> beanList = new ArrayList<>(goodsDataList.size());
-        for (GoodsData goodsData : goodsDataList) {
+        for ( GoodsData goodsData : goodsDataList ) {
             GoodBean goodBean = new GoodBean();
             goodBean.setId(goodsData.getId());
             goodBean.setName(goodsData.getName());
@@ -106,12 +106,12 @@ public class GoodsSolrServiceImpl implements GoodsSolrService {
         try {
             solrClient.addBeans(beanList);
             solrClient.commit();
-        } catch (Exception e) {
+        } catch ( Exception e ) {
             log.info("批量保存商品信息到solr异常：{}", e);
         } finally {
             try {
                 solrClient.close();
-            } catch (IOException e) {
+            } catch ( IOException e ) {
                 log.info("关闭solrClient异常：{}", e);
             }
         }
@@ -129,13 +129,13 @@ public class GoodsSolrServiceImpl implements GoodsSolrService {
             solrQuery.setHighlightSimplePost("</font>");
             solrQuery.addHighlightField("name");
             QueryResponse queryResponse = solrClient.query(solrQuery);
-            if (solrQuery.getHighlight()) {
+            if ( solrQuery.getHighlight() ) {
                 convertHighLightResult(queryResponse);
             }
             return queryResponse.getBeans(GoodBean.class);
-        } catch (SolrServerException e) {
+        } catch ( SolrServerException e ) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch ( IOException e ) {
             e.printStackTrace();
         }
         return null;
@@ -143,19 +143,19 @@ public class GoodsSolrServiceImpl implements GoodsSolrService {
 
     private void convertHighLightResult(QueryResponse queryResponse) {
         SolrDocumentList documentList = queryResponse.getResults();
-        if (null == documentList || documentList.isEmpty()) {
+        if ( null == documentList || documentList.isEmpty() ) {
             return;
         }
-        if (null == queryResponse.getHighlighting() || queryResponse.getHighlighting().isEmpty()) {
+        if ( null == queryResponse.getHighlighting() || queryResponse.getHighlighting().isEmpty() ) {
             return;
         }
-        for (SolrDocument solrDocument : documentList) {
+        for ( SolrDocument solrDocument : documentList ) {
             Map listMap = (Map) queryResponse.getHighlighting().get(solrDocument.get("id"));
-            if (null == listMap || listMap.isEmpty()) {
+            if ( null == listMap || listMap.isEmpty() ) {
                 continue;
             }
             List<String> resultList = (List) listMap.get("name");
-            if (null == resultList || resultList.isEmpty()) {
+            if ( null == resultList || resultList.isEmpty() ) {
                 continue;
             }
             solrDocument.setField("name", resultList.get(0));
@@ -174,22 +174,22 @@ public class GoodsSolrServiceImpl implements GoodsSolrService {
         try {
             QueryResponse queryResponse = solrClient.query(solrQuery);
             List<FacetField> list = queryResponse.getFacetFields();
-            if (null == list || list.isEmpty()) {
+            if ( null == list || list.isEmpty() ) {
                 return;
             }
-            for (FacetField facetField : list) {
+            for ( FacetField facetField : list ) {
                 System.out.println(facetField.getName());
                 List<FacetField.Count> countList = facetField.getValues();
-                if (null == countList || countList.isEmpty()) {
+                if ( null == countList || countList.isEmpty() ) {
                     continue;
                 }
-                for (FacetField.Count count : countList) {
+                for ( FacetField.Count count : countList ) {
                     System.out.println(count.getName() + "===" + count.getCount());
                 }
             }
-        } catch (SolrServerException e) {
+        } catch ( SolrServerException e ) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch ( IOException e ) {
             e.printStackTrace();
         }
     }
