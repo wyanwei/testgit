@@ -31,7 +31,7 @@ public class UUIDUtil {
         int baseLength = base.length();
         Random random = new Random();
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < length; i++) {
+        for ( int i = 0; i < length; i++ ) {
             int index = random.nextInt(baseLength);
             stringBuilder.append(base.charAt(index));
         }
