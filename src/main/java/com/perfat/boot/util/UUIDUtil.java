@@ -10,6 +10,8 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
+ * 工具类
+ *
  * @author wangyw <a href="mailto:wangyw@chsi.com.cn">WangYanWei</a>
  * @version $Id: UUIDUtil.java 16 2019-08-07 08:28:05Z 二进制 $
  */
