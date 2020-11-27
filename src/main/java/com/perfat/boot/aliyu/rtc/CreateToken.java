@@ -57,7 +57,7 @@ public class CreateToken {
 
     public static String createUserID(String channelID, String user) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        digest.update(channelID.getBytes());
+        digest.update(channelID.getBytes()); 
         digest.update("/".getBytes());
         digest.update(user.getBytes());
 
@@ -74,7 +74,7 @@ public class CreateToken {
 
     class LoginHandler implements HttpHandler {
         public void handle(HttpExchange he) throws IOException {
-            if (he.getRequestHeaders().containsKey("Origin")) {
+            if ( he.getRequestHeaders().containsKey("Origin") ) {
                 Headers headers = he.getResponseHeaders();
                 headers.set("Access-Control-Allow-Origin", "*");
                 headers.set("Access-Control-Allow-Methods", "GET,POST,HEAD,PUT,DELETE,OPTIONS");
@@ -82,17 +82,17 @@ public class CreateToken {
                 headers.set("Access-Control-Allow-Headers", "Origin,Range,Accept-Encoding,Referer,Cache-Control,X-Proxy-Authorization,X-Requested-With,Content-Type");
             }
 
-            if (he.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
+            if ( he.getRequestMethod().equalsIgnoreCase("OPTIONS") ) {
                 httpWrite(he, 200, "");
                 return;
             }
 
             Map<String, String> query = new HashMap<String, String>();
-            for (String param : he.getRequestURI().getQuery().split("&")) {
+            for ( String param : he.getRequestURI().getQuery().split("&") ) {
                 String[] entry = param.split("=");
-                if (entry.length > 1) {
+                if ( entry.length > 1 ) {
                     query.put(entry[0], entry[1]);
-                }else{
+                } else {
                     query.put(entry[0], "");
                 }
             }
@@ -100,7 +100,7 @@ public class CreateToken {
             String channelID = query.get("room");
             String user = query.get("user");
 
-            if (channelID == "" || user == "") {
+            if ( channelID == "" || user == "" ) {
                 httpWrite(he, 500, "invalid parameter");
                 return;
             }
@@ -121,7 +121,7 @@ public class CreateToken {
                 timestamp = nowTime.getTimeInMillis() / 1000;
 
                 token = createToken(appID, appKey, channelID, userID, nonce, timestamp);
-            } catch (NoSuchAlgorithmException e) {
+            } catch ( NoSuchAlgorithmException e ) {
                 e.printStackTrace();
                 httpWrite(he, 500, e.getMessage());
                 return;
@@ -129,7 +129,7 @@ public class CreateToken {
             String username = String.format("%s?appid=%s&channel=%s&nonce=%s&timestamp=%d",
                     userID, appID, channelID, nonce, timestamp);
 
-            System.out.printf("Login: appID=%s, appKey=%s, channelID=%s, userID=%s, nonce=%s, "+
+            System.out.printf("Login: appID=%s, appKey=%s, channelID=%s, userID=%s, nonce=%s, " +
                             "timestamp=%d, user=%s, userName=%s, token=%s\n",
                     appID, appKey, channelID, userID, nonce, timestamp, user, username, token);
 
@@ -158,16 +158,16 @@ public class CreateToken {
         options.addOption(new Option("k", "appkey", true, "the key of app"));
         options.addOption(new Option("g", "gslb", true, "the url of gslb"));
         CommandLine cli = new PosixParser().parse(options, args);
-        if (!cli.hasOption("listen")) {
+        if ( !cli.hasOption("listen") ) {
             throw new Exception("no listen");
         }
-        if (!cli.hasOption("appid")) {
+        if ( !cli.hasOption("appid") ) {
             throw new Exception("no appid");
         }
-        if (!cli.hasOption("appkey")) {
+        if ( !cli.hasOption("appkey") ) {
             throw new Exception("no appkey");
         }
-        if (!cli.hasOption("gslb")) {
+        if ( !cli.hasOption("gslb") ) {
             throw new Exception("no gslb");
         }
 
@@ -185,7 +185,7 @@ public class CreateToken {
     public static void main(String[] args) {
         try {
             new CreateToken().run(args);
-        } catch (Exception e) {
+        } catch ( Exception e ) {
             System.out.println(e);
         }
     }
