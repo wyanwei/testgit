@@ -61,7 +61,7 @@ public class BootUtil {
      * @return 校验通过返回true，否则返回false
      */
     public static boolean isUsername(String username) {
-        if (StringUtils.isBlank(username)) {
+        if ( StringUtils.isBlank(username) ) {
             return false;
         }
         return Pattern.matches(REGEX_USERNAME, username);
@@ -74,7 +74,7 @@ public class BootUtil {
      * @return 校验通过返回true，否则返回false
      */
     public static boolean isPassword(String password) {
-        if (StringUtils.isBlank(password)) {
+        if ( StringUtils.isBlank(password) ) {
             return false;
         }
         return Pattern.matches(REGEX_PASSWORD, password);
@@ -87,7 +87,7 @@ public class BootUtil {
      * @return 校验通过返回true，否则返回false
      */
     public static boolean isMobile(String mobile) {
-        if (StringUtils.length(mobile) != 11) {
+        if ( StringUtils.length(mobile) != 11 ) {
             return false;
         }
         return Pattern.matches(REGEX_MOBILE, mobile);
@@ -100,7 +100,7 @@ public class BootUtil {
      * @return 校验通过返回true，否则返回false
      */
     public static boolean isEmail(String email) {
-        if (StringUtils.isBlank(email)) {
+        if ( StringUtils.isBlank(email) ) {
             return false;
         }
         return Pattern.matches(REGEX_EMAIL, email);
