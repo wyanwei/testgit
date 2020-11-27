@@ -33,9 +33,9 @@ public class MapTest {
         System.out.println("putIfAbsent：" + newValue2);
 
         //对象有的更细
-        String ifValu = map.computeIfPresent("12", (k, v) -> v +"15");
+        String ifValu = map.computeIfPresent("12", (k, v) -> v + "15");
         System.out.println("ifVal：" + ifValu);
-        String ifValu1 = map.computeIfPresent("15", (k, v) -> v +"15");
+        String ifValu1 = map.computeIfPresent("15", (k, v) -> v + "15");
         System.out.println("ifVal：" + ifValu1);
 
         map.entrySet().forEach(entry -> System.out.println(entry.getValue()));
