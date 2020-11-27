@@ -23,7 +23,6 @@ public class Test {
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -66,6 +65,4 @@ public class Test {
         int r = random(10000, 30000);
         return String.valueOf(r);
     }
-
-
 }
