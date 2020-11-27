@@ -10,6 +10,8 @@ import com.perfat.boot.support.bean.GoodBean;
 import java.util.List;
 
 /**
+ * solr服务
+ *
  * @author wangyw <a href="mailto:wangyw@chsi.com.cn">WangYanWei</a>
  * @version $Id: GoodsSolrService.java 8 2019-06-06 10:27:09Z 二进制 $
  */
