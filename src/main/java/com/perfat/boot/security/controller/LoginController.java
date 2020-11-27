@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 登陆控制页面
+ * 登陆控制页面1
  *
  * @author wangyw <a href="mailto:wangyw@chsi.com.cn">WangYanWei</a>
  * @version $Id$
