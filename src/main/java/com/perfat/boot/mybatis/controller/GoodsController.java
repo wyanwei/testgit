@@ -22,6 +22,9 @@ import java.util.List;
 @RequestMapping(value = "/gs")
 public class GoodsController {
 
+
+    
+
     @Autowired
     GoodsService goodsService;
 
