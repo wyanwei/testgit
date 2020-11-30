@@ -14,6 +14,10 @@ import java.util.Calendar;
 public class Test {
     /**
      * volatile 的好处，禁止指令重排，可见性
+     *
+     *
+     *
+     * 
      */
     private volatile static Test test;
 
