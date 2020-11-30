@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @version $Id$
  */
 @Component
-//以memcache开头的配置文件加载到属性中
+//以memcache开头的配置文件加载
 @ConfigurationProperties(prefix = "memcache", ignoreInvalidFields = true)
 @Getter
 @Setter
