@@ -12,7 +12,6 @@ import com.perfat.boot.security.entity.RoleInfoData;
 import com.perfat.boot.security.entity.UserInfoData;
 import com.perfat.boot.security.entity.UserRoleInfoData;
 import com.perfat.boot.security.service.SecurityService;
-import com.perfat.boot.security.service.support.SecurityMemcachKey;
 import com.perfat.boot.security.vo.UserInfoVo;
 import com.perfat.boot.security.vo.UserRoleVo;
 import org.apache.commons.lang.StringUtils;
@@ -35,7 +34,7 @@ public class SecurityServiceImpl implements SecurityService {
     private RoleDao roleDao;
     @Autowired
     private UserRoleDao userRoleDao;
-    @Autowired
+    //@Autowired
     private MemcacheClient memcacheClient;
 
     @Override
@@ -43,14 +42,14 @@ public class SecurityServiceImpl implements SecurityService {
         if (StringUtils.isBlank(username)) {
             return null;
         }
-        String key = SecurityMemcachKey.getUserInfoByUserNameKey(username);
+       /* String key = SecurityMemcachKey.getUserInfoByUserNameKey(username);
         UserInfoVo userInfoVo = memcacheClient.get(key);
         if (null != userInfoVo) {
             return userInfoVo;
-        }
+        }*/
         UserInfoData userInfoData = userDao.getUserInfoByUsername(username);
-        userInfoVo = getUserInfoVo(userInfoData);
-        memcacheClient.set(key, userInfoVo, 1800);
+        UserInfoVo userInfoVo = getUserInfoVo(userInfoData);
+        //memcacheClient.set(key, userInfoVo, 1800);
         return userInfoVo;
     }
 

@@ -3,6 +3,7 @@ package com.perfat.boot;
 import org.activiti.spring.boot.SecurityAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * https://www.cnblogs.com/momoweiduan/p/9454140.html 解决springboot 与activiti整合启动报错的问题
@@ -15,15 +16,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author wangyw
  */
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+@EnableScheduling
 public class BootApplication {
-
     public static void main(String[] args) {
-
-        //测试git 测试提交测--主干提交
-        //dev-测试提交-de1
         SpringApplication.run(BootApplication.class, args);
-
-        //启动注解测试HaHa
     }
-
 }

@@ -23,7 +23,6 @@ public class StringRandomGenerator implements IdentifierGenerator, Configurable 
 
     @Override
     public void configure(Type type, Properties properties, ServiceRegistry serviceRegistry) throws MappingException {
-
     }
 
     @Override

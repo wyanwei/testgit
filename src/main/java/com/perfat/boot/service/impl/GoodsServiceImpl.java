@@ -57,6 +57,7 @@ public class GoodsServiceImpl implements GoodsService {
         goodsInfo.setDesc(goodsData.getDesc());
         goodsInfo.setName(goodsData.getName());
         goodsDao.save(goodsInfo);
+
         //保存至solr中
         goodsSolrService.saveGoodsDataByBean(goodsInfo);
     }
