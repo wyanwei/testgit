@@ -40,7 +40,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(customUserService()).passwordEncoder(new BCryptPasswordEncoder());
     }
 
-
     /**
      * 1、匹配路径的时候需要去除根路径。不然匹配不到
      * 2、权限名称默认加上ROLE_,配置的不需要再加上ROLT_,加上会直接报异常的
@@ -78,7 +77,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             }
         };
     }
-
 
     /**
      * 登录成功进入

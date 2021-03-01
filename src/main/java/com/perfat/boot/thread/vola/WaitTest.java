@@ -46,16 +46,17 @@ public class WaitTest {
         c1.setNum(60);
         c1.setNum(20);
 
-        c1.start();
-        c2.start();
-        c3.start();
-        c4.start();
-
         p1.start();
         p2.start();
         p3.start();
         p4.start();
         p5.start();
+
+        c1.start();
+        c2.start();
+        c3.start();
+        c4.start();
+
         p6.start();
         p7.start();
         p8.start();

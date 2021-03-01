@@ -6,7 +6,6 @@ package com.perfat.boot.support.bean;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.solr.client.solrj.beans.Field;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,18 +17,18 @@ import java.util.Date;
 @Getter
 @Setter
 public class GoodBean implements Serializable {
-    @Field(value = "id")
+    //@Field(value = "id")
     private String id;
-    @Field(value = "name")
+    //@Field(value = "name")
     private String name;
-    @Field(value = "number")
+    //@Field(value = "number")
     private String number;
-    @Field(value = "updateTime")
+   // @Field(value = "updateTime")
     private Date updateTime;
-    @Field(value = "price")
+    //@Field(value = "price")
     private String price;
-    @Field(value = "desc")
+   // @Field(value = "desc")
     private String desc;
-    @Field(value = "brand")
+   // @Field(value = "brand")
     private String brand;
 }

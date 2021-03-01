@@ -4,6 +4,7 @@
  */
 package com.perfat.boot.security.controller;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @version $Id$
  */
 @Controller
+@Scope("prototype")
 public class LoginController {
 
     /**
@@ -31,7 +33,7 @@ public class LoginController {
     public String index() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth instanceof AnonymousAuthenticationToken) {
-            return "login";
+            return "jsp/login";
         }
         return "redirect:/show";
     }
@@ -40,6 +42,11 @@ public class LoginController {
     public String show(Model model) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("username", userDetails.getUsername());
-        return "index";
+        return "jsp/index";
+    }
+
+    @RequestMapping(value = "/ceshi")
+    public String showHtml() {
+        return "html/index";
     }
 }

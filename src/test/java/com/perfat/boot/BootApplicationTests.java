@@ -22,7 +22,7 @@ public class BootApplicationTests {
 
     //@Autowired
     MemcachedUtils memcachedUtils;
-    @Autowired
+    //@Autowired
     RedisTemplate redisTemplate;
 
     /**

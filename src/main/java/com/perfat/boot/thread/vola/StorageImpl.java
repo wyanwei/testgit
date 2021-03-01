@@ -26,7 +26,6 @@ public class StorageImpl implements AbstractStorage{
                 }
             }
 
-
             for (int i = 0; i < num; i++) {
                 list.add(new Object());
             }
