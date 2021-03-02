@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class FactoryBeanPostProcessor implements BeanFactoryPostProcessor {
+  
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
         System.out.println("初始化bean");
