@@ -1,0 +1,19 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /boot/remote
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: eurekaServer
+  client:
+    #是否将自己注册到Eureka-Server中，默认的为true
+    register-with-eureka: false
+    #是否从Eureka-Server中获取服务注册信息，默认为true, 由于注册中心的职责就是维护服务实例，它并不需要去检索服务， 所以也设置为 false。
+    fetch-registry: false
+    service-url:
+       defaultZone: http://${eureka.instance.hostname}:${server.port}/${server.servlet.context-path}/eureka/
+
+spring:
+  application:
+    name: eurekaServer
