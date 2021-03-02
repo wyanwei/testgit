@@ -29,7 +29,9 @@ public class BootInitDataTask implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        log.info("服务器启动执行任务- 记录启动时间");
+        if ( log.isInfoEnabled() ) {
+            log.info("服务器启动执行任务 - 记录启动时间");
+        }
         BootServiceStartLogData startLogData = new BootServiceStartLogData();
         startLogData.setStartTime(Calendar.getInstance());
         bootServiceLogService.saveOrUpdate(startLogData);

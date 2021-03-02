@@ -21,6 +21,8 @@ public class BootClearDataTask implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        log.info("服务器启动执行任务 - 清除数据");
+        if ( log.isInfoEnabled() ) {
+            log.info("服务器启动执行任务 - 清除数据");
+        }
     }
 }
