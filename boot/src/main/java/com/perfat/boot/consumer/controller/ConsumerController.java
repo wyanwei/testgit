@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,16 +37,21 @@ public class ConsumerController {
 
     @RequestMapping(value = "/hi")
     public String hello() {
+        List<String> serverList = client.getServices();
 
-        List<ServiceInstance> instanceList = client.getInstances("eureka-client");
+        List<ServiceInstance> instanceList = client.getInstances("EUREKA-CLIENT");
 
-        ServiceInstance instance2 = balancerClient.choose("eureka-client");
+        ServiceInstance instance2 = balancerClient.choose("EUREKA-CLIENT");
 
         instanceList.forEach(instance -> {
             String url = "http://" + instance.getHost() + ":" + instance.getPort() + "/boot/remote/say/hi";
 
             log.info("测试：" + restTemplate.getForObject(url, String.class));
         });
+
+        String url = "http://EUREKA-CLIENT/say/hi";
+
+
 
         return "测试成功";
     }

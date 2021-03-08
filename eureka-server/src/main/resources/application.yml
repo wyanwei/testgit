@@ -5,7 +5,7 @@ server:
 eureka:
   instance:
     hostname: localhost
-    instance-id: eurekaServer
+    instance-id: eureka-server
   client:
     #是否将自己注册到Eureka-Server中，默认的为true
     register-with-eureka: false
