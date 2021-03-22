@@ -39,9 +39,9 @@ public class ConsumerController {
     public String hello() {
         List<String> serverList = client.getServices();
 
-        List<ServiceInstance> instanceList = client.getInstances("EUREKA-CLIENT");
+        List<ServiceInstance> instanceList = client.getInstances("eureka-client");
 
-        ServiceInstance instance2 = balancerClient.choose("EUREKA-CLIENT");
+        ServiceInstance instance2 = balancerClient.choose("eureka-client");
 
        /* instanceList.forEach(instance -> {
             String url = "http://" + instance.get + ":" + instance.getPort() + "/boot/remote/say/hi";
@@ -49,7 +49,7 @@ public class ConsumerController {
             log.info("测试：" + restTemplate.getForObject(url, String.class));
         });*/
 
-        String url = "http://EUREKA-CLIENT/say/hi";
+        String url = "http://eureka-client/say/hi";
 
         return restTemplate.getForObject(url, String.class);
     }
