@@ -34,9 +34,5 @@ public class Test {
         nowDate.add(Calendar.HOUR_OF_DAY, -2);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println(sdf.format(nowDate.getTime()));
-
-
-        String str = "xm=, sfzh=, yxmc=, bynf=, zsbh=";
-        System.out.println(str.length());
     }
 }

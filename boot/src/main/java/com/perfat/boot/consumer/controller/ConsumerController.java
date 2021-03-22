@@ -43,17 +43,15 @@ public class ConsumerController {
 
         ServiceInstance instance2 = balancerClient.choose("EUREKA-CLIENT");
 
-        instanceList.forEach(instance -> {
-            String url = "http://" + instance.getHost() + ":" + instance.getPort() + "/boot/remote/say/hi";
+       /* instanceList.forEach(instance -> {
+            String url = "http://" + instance.get + ":" + instance.getPort() + "/boot/remote/say/hi";
 
             log.info("测试：" + restTemplate.getForObject(url, String.class));
-        });
+        });*/
 
         String url = "http://EUREKA-CLIENT/say/hi";
 
-
-
-        return "测试成功";
+        return restTemplate.getForObject(url, String.class);
     }
 
 }
