@@ -1,0 +1,91 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}" th:with="title='测试'">
+<div class="border-shadow min-height">
+    <div class="send-btn alignCenter padding030">
+        <script src="https://js.stripe.com/v3"></script>
+        <button style="display: none;" class='stripe-button-el' id="cardPayCheckOutButton">信用卡支付</button>
+    </div>
+</div>
+<style>
+    /**弹出框改成信用卡支付方式**/
+    .modal-content{display: inline-block;border-radius: 6px;width: 300px;margin-left: 40px;padding-bottom: 36px;position: relative;background-color: #f5f5f7;box-shadow: 0 12px 30px 0 rgba(0,0,0,.5), inset 0 1px 0 0 hsla(0,0%,100%,.65);-webkit-backface-visibility: hidden;backface-visibility: hidden;font-family: Helvetica Neue,Helvetica,Arial,sans-serif;line-height: 1.5;}
+    .modal-header .close{    right: 6px;top: 6px;position: absolute;width: 25px;height: 25px;}
+    .modal-header{padding: 18px 36px;text-align: center;background-color: #e8e9eb;border-top-left-radius: 6px;border-top-right-radius: 6px;border-bottom: 1px solid #d0d1d4;}
+    .modal-header h4{font-size: 17px;font-weight: 700;color: #000;text-shadow: 0 1px 0 #fff;font-family: Helvetica Neue,Helvetica,Arial,sans-serif;line-height: 1.5;}
+    .modal-header p{font-size: 13px;font-weight: 500;color: #5b5b65;text-shadow: 0 1px 0 #fff;padding-bottom: 6px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;font-family: Helvetica Neue,Helvetica,Arial,sans-serif;line-height: 1.5;}
+    .modal-dialog .modal-body{margin:40px 36px;padding:0;}
+    .zf-btn{border: none;position: relative;border-radius: 4px;background-color: #3ea8e5;background-image: -webkit-gradient(linear,left top,left bottom,from(#44b1e8),to(#3098de));background-image: -webkit-linear-gradient(top,#44b1e8,#3098de);background-image: linear-gradient(-180deg,#44b1e8,#3098de);box-shadow: 0 1px 0 0 rgba(46,86,153,.15), inset 0 1px 0 0 rgba(46,86,153,.1), inset 0 -1px 0 0 rgba(46,86,153,.4);font-size: 17px;line-height: 21px;height: 30px;font-weight: 700;text-shadow: 0 -1px 0 rgba(0,0,0,.12);color: #fff;cursor: pointer;-webkit-transition: all .2s ease-in-out;transition: all .2s ease-in-out;width:216px;}
+    input[type=text].input-email{border-radius: 4px;padding: 4px;font-size: 15px;color: #000;padding-left: 29px;line-height: normal!important;background: #fff;width: 191px; margin-bottom: 40px;height: 30px}
+    input[type=text].error-border{border-color:#ff5c61;}
+    :focus {outline: none;}
+    .email-block{position: relative;}
+    .email-block .iconfont{position: absolute;top: 2px;left: 7px;font-size: 20px;color: #333;}
+
+    /**正在加载中*/
+    .loading-bg{width: 100%;height: 100%;position: absolute;top: 0;left: 0;background: #999;opacity: 0.4;z-index: 1040;}
+    .loading-bg img{position: relative;left: 50%;top: 234px;width: 30px;margin-left: -15px;}
+</style>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id='alipay' style="display: none;">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body">
+                <div class="email-block">
+                    <i class="iconfont" title="电子邮箱">&#xe651;</i>
+                    <input type="text" name="email" id="email" class="input-email" placeholder='电子邮箱'/><br>
+                </div>
+                <button type="submit" class="zf-btn" id="alipayButton">支付</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/boot/js/common/jquery-1.8.3.js"></script>
+<script>
+    var stripe = null;
+    $(function(){
+        if (!!!Function.bind) {
+            $(".error-txt").removeClass("hide");
+        }
+        initStripeCardPay();
+        $("#cardPayCheckOutButton").click(function () {
+            cardPay();
+        });
+
+    });
+    function initStripeCardPay() {
+        try {
+            stripe = Stripe('pk_test_51JD1N3JEDCE6QOvpFG4xKMoLgnrLyuvZjdShf8hhIRLihzStN2WhtvadzidK8d8m38LrbBRCCXCaW8WJZ1DTsUEW00fxv1Hp3m');
+        } catch ( e ) {
+            return;
+        }
+        $("#cardPayCheckOutButton").show();
+    }
+
+    function cardPay() {
+        $.ajax({
+            url : '/boot/stripe/pay',
+            cache : false,
+            dataType : 'json',
+            beforeSend : function() {
+                $("#cardPayCheckOutButton").attr("disabled","disabled");
+                $("body").append("<div class='loading-bg'><img src='https://t1.chei.com.cn/common/images/loading.gif' /><div>");
+                $('.loading-bg').css('z-index','2040');
+            },
+            success : function(dataValue) {
+                stripe.redirectToCheckout({
+                    sessionId : dataValue.sessionId
+                }).then(function (result) {
+                    if (result.error) {
+                        alert("操作失败，请刷新页面重新尝试");
+                    }
+                });
+            },
+            error : function() {
+                alert("请刷新页面，重新尝试！");
+            }
+        })
+    }
+</script>

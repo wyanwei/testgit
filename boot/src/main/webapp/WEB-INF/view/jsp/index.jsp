@@ -14,8 +14,12 @@
 <body>
 <h1>hi : ${username}</h1>
 <input type="button" onclick="dianjiwo()" value="点我"/>
+<input type="button" onclick="logout()" value="退出"/>
 </body>
 <script type="text/javascript">
+    function logout() {
+        window.location.href = "/boot/logout";
+    }
     function dianjiwo() {
         $.ajax({
             type: 'POST',

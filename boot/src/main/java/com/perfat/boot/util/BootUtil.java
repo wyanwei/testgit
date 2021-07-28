@@ -6,6 +6,8 @@ package com.perfat.boot.util;
 
 import org.apache.commons.lang.StringUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.regex.Pattern;
 
 /**
@@ -154,5 +156,10 @@ public class BootUtil {
      */
     public static String convertIntToBinaryString(int value) {
         return Integer.toBinaryString(value);
+    }
+
+    public static String convertTimeToStr(Calendar time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(time.getTime());
     }
 }

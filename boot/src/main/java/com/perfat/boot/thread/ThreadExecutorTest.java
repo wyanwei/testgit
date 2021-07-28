@@ -5,7 +5,9 @@
 package com.perfat.boot.thread;
 
 import com.perfat.boot.security.entity.UserInfoData;
+import com.perfat.boot.util.BootUtil;
 
+import java.util.Calendar;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -24,29 +26,30 @@ public class ThreadExecutorTest {
         //ExecutorService cacheThreadPool = Executors.newCachedThreadPool();
 
         //固定个数的线程池
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+        //ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
 
         //ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor()
 
         //定时线程
         ScheduledExecutorService scheduThreadPool = Executors.newScheduledThreadPool(1);
 
-        ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+       // ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
         //系统资源
         System.out.println(Runtime.getRuntime().availableProcessors());
 
-       /* long startTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
         scheduThreadPool.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                System.out.println("延迟1s后每3秒执行一次");
+                //System.out.println("延迟1s后每3秒执行一次");
+                System.out.println(BootUtil.convertTimeToStr(Calendar.getInstance()));
             }
-        }, 1, 3, TimeUnit.SECONDS);
+        }, 0, 3, TimeUnit.SECONDS);
 
-        System.out.println("耗时：" + (System.currentTimeMillis()- startTime)+"ms");*/
+        System.out.println("耗时：" + (System.currentTimeMillis()- startTime)+"ms");
 
-        for ( int i = 0; i < 10; i++ ) {
-            final int index = i;
+        //for ( int i = 0; i < 10; i++ ) {
+          //  final int index = i;
             /*fixedThreadPool.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -59,16 +62,16 @@ public class ThreadExecutorTest {
                 }
             });
 */
-            fixedThreadPool.execute(() -> {
-                System.out.println("线程" + Thread.currentThread().getName()+ "打印当前值:" + index);
+            //fixedThreadPool.execute(() -> {
+              //  System.out.println("线程" + Thread.currentThread().getName()+ "打印当前值:" + index);
                 /*try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }*/
-              }
-            );
-        }
+             // }
+            //);
+        //}
 
 
 

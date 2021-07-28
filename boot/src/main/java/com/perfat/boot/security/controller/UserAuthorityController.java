@@ -25,7 +25,7 @@ import java.util.List;
  * 用户权限控制管理
  *
  * @author wangyw <a href="mailto:wangyw@chsi.com.cn">WangYanWei</a>
- * @version $Id: UserAuthorityController.java 16 2019-08-07 08:28:05Z 二进制 $
+ * @version $Id$
  */
 @Controller
 @RequestMapping(value = "/admin/auth")

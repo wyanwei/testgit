@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -42,28 +43,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 1、匹配路径的时候需要去除根路径。不然匹配不到
-     * 2、权限名称默认加上ROLE_,配置的不需要再加上ROLT_,加上会直接报异常的
+     * 2、权限名称默认加上ROLE_,配置的不需要再加上ROLE_,加上会直接报异常的
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()//http.authorizeRequests() 方法中的自定义匹配
-                .antMatchers("/index.jsp", "/anonymous/**").permitAll()//定义哪些请求不用拦截保护
+                .antMatchers("/index.jsp", "/anonymous/**", "/upload", "/ces", "/stripe/**", "/js/**").permitAll()//定义哪些请求不用拦截保护
                 .antMatchers("/admin/**").hasAnyRole("SECURITY_ADMIN", "CUSTOMER")
 
                 .anyRequest().authenticated()//任何请求，登录后可以访问
                 .and()
-                .formLogin().loginPage("/login")
-                .loginProcessingUrl("/login")
-                .successHandler(loginSuccessHandler())
-                .failureUrl("/login?error=true")
-                .permitAll()//登录页面用户任意访问
+                    .formLogin()
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .successHandler(loginSuccessHandler())
+                        .failureUrl("/login?error=true")
+                        .permitAll()//登录页面用户任意访问
                 .and()
-                .logout()
-                .logoutUrl("/logout") //指定注销路径
-                .logoutSuccessUrl("/boot/index.jsp") //指定成功注销后的跳转路径
-                .logoutSuccessHandler(logoutSuccessHandler()) //指定成功注销后的处理类
-                .permitAll();//注销任意访问
+                    .logout()
+                    .logoutUrl("/logout") //指定注销路径
+                    .logoutSuccessUrl("/boot/show") //指定成功注销后的跳转路径
+                    .logoutSuccessHandler(logoutSuccessHandler()) //指定成功注销后的处理类
+                    .deleteCookies("JSESSIONID")
+                    .permitAll();//注销任意访问
+        //关闭打开的csrf保护
         http.csrf().disable();
+        //csrfTokenRepository(new CookieCsrfTokenRepository()).configure(http);
     }
 
     /**
@@ -74,6 +79,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new LogoutSuccessHandler() {
             @Override
             public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+                System.out.println("退出成功！");
+                httpServletResponse.sendRedirect("/boot/show");
             }
         };
     }
