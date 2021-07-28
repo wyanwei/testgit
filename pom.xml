@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>boot</module>
+        <module>boot</module>  
         <module>eureka-server</module>
         <module>eureka-client</module>
     </modules>
